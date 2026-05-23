@@ -1,0 +1,315 @@
+--// Cosmic Hub | Brookhaven
+--// By: douguser25
+
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local player = Players.LocalPlayer
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.CoreGui
+gui.ResetOnSpawn = false
+
+-- MAIN
+local main = Instance.new("Frame")
+main.Parent = gui
+main.Size = UDim2.new(0,1080,0,650)
+main.Position = UDim2.new(0.18,0,0.1,0)
+main.BackgroundColor3 = Color3.fromRGB(25,0,0)
+main.BackgroundTransparency = 0.25
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true
+
+Instance.new("UICorner", main).CornerRadius = UDim.new(0,12)
+
+-- TITLE
+local title = Instance.new("TextLabel")
+title.Parent = main
+title.BackgroundTransparency = 1
+title.Position = UDim2.new(0.02,0,0.015,0)
+title.Size = UDim2.new(0,350,0,40)
+title.Font = Enum.Font.GothamBold
+title.Text = "Cosmic Hub | Brookhaven"
+title.TextColor3 = Color3.new(1,1,1)
+title.TextSize = 24
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+local by = Instance.new("TextLabel")
+by.Parent = main
+by.BackgroundTransparency = 1
+by.Position = UDim2.new(0.25,0,0.018,0)
+by.Size = UDim2.new(0,200,0,30)
+by.Font = Enum.Font.Gotham
+by.Text = "By: douguser25"
+by.TextColor3 = Color3.fromRGB(170,170,170)
+by.TextSize = 16
+by.TextXAlignment = Enum.TextXAlignment.Left
+
+-- CLOSE
+local close = Instance.new("TextButton")
+close.Parent = main
+close.Size = UDim2.new(0,35,0,35)
+close.Position = UDim2.new(0.96,0,0.01,0)
+close.BackgroundTransparency = 1
+close.Text = "✕"
+close.Font = Enum.Font.GothamBold
+close.TextColor3 = Color3.new(1,1,1)
+close.TextSize = 26
+
+-- SIDEBAR
+local sidebar = Instance.new("Frame")
+sidebar.Parent = main
+sidebar.BackgroundTransparency = 1
+sidebar.Position = UDim2.new(0.02,0,0.09,0)
+sidebar.Size = UDim2.new(0,280,0,550)
+
+local layout = Instance.new("UIListLayout")
+layout.Parent = sidebar
+layout.Padding = UDim.new(0,10)
+
+-- CONTENT
+local content = Instance.new("Frame")
+content.Parent = main
+content.BackgroundColor3 = Color3.fromRGB(40,0,0)
+content.BackgroundTransparency = 0.35
+content.Position = UDim2.new(0.33,0,0.09,0)
+content.Size = UDim2.new(0,710,0,550)
+content.BorderSizePixel = 0
+
+Instance.new("UICorner", content).CornerRadius = UDim.new(0,12)
+
+-- TAB BUTTON
+function createTab(name)
+	local btn = Instance.new("TextButton")
+	btn.Parent = sidebar
+	btn.Size = UDim2.new(1,0,0,45)
+	btn.BackgroundColor3 = Color3.fromRGB(20,0,0)
+	btn.BackgroundTransparency = 0.25
+	btn.BorderSizePixel = 0
+	btn.Text = "   "..name
+	btn.Font = Enum.Font.Gotham
+	btn.TextSize = 20
+	btn.TextColor3 = Color3.new(1,1,1)
+	btn.TextXAlignment = Enum.TextXAlignment.Left
+
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,10)
+
+	return btn
+end
+
+-- CLEAR
+function clear()
+	for _,v in pairs(content:GetChildren()) do
+		v:Destroy()
+	end
+end
+
+-- CREATE BOX
+function createBox(titleText, descText, posY)
+	local frame = Instance.new("Frame")
+	frame.Parent = content
+	frame.BackgroundColor3 = Color3.fromRGB(15,0,0)
+	frame.BackgroundTransparency = 0.25
+	frame.Position = UDim2.new(0.03,0,posY,0)
+	frame.Size = UDim2.new(0,660,0,70)
+	frame.BorderSizePixel = 0
+
+	Instance.new("UICorner", frame).CornerRadius = UDim.new(0,10)
+
+	local title = Instance.new("TextLabel")
+	title.Parent = frame
+	title.BackgroundTransparency = 1
+	title.Position = UDim2.new(0.03,0,0.1,0)
+	title.Size = UDim2.new(0,500,0,25)
+	title.Font = Enum.Font.GothamBold
+	title.Text = titleText
+	title.TextColor3 = Color3.new(1,1,1)
+	title.TextSize = 20
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	local desc = Instance.new("TextLabel")
+	desc.Parent = frame
+	desc.BackgroundTransparency = 1
+	desc.Position = UDim2.new(0.03,0,0.5,0)
+	desc.Size = UDim2.new(0,500,0,20)
+	desc.Font = Enum.Font.Gotham
+	desc.Text = descText
+	desc.TextColor3 = Color3.fromRGB(180,180,180)
+	desc.TextSize = 15
+	desc.TextXAlignment = Enum.TextXAlignment.Left
+end
+
+-- TABS
+local credits = createTab("ⓘ credits")
+local fun = createTab("ƒ Fun")
+local avatar = createTab("👕 Avatar")
+local house = createTab("⌂ House")
+local car = createTab("🚗 Car")
+local rgb = createTab("🖌 RGB")
+local musicall = createTab("◉ Music All")
+local music = createTab("♫ Music")
+local troll = createTab("☠ Troll")
+local protection = createTab("🛡 Protection")
+local admin = createTab("🛡 Painel Adm")
+
+-- CREDITS
+credits.MouseButton1Click:Connect(function()
+	clear()
+
+	local title = Instance.new("TextLabel")
+	title.Parent = content
+	title.BackgroundTransparency = 1
+	title.Position = UDim2.new(0.03,0,0.03,0)
+	title.Size = UDim2.new(0,500,0,40)
+	title.Font = Enum.Font.GothamBold
+	title.Text = "Créditos do Hub"
+	title.TextColor3 = Color3.new(1,1,1)
+	title.TextSize = 28
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	createBox("Desenvolvedor:", "douguser25",0.15)
+	createBox("Admin:", "Ninguém",0.30)
+	createBox("Você Está Usando:", "Cosmic Hub",0.45)
+
+	local discord = Instance.new("TextLabel")
+	discord.Parent = content
+	discord.BackgroundTransparency = 1
+	discord.Position = UDim2.new(0.03,0,0.63,0)
+	discord.Size = UDim2.new(0,500,0,35)
+	discord.Font = Enum.Font.GothamBold
+	discord.Text = "Discord Do Desenvolvedor"
+	discord.TextColor3 = Color3.new(1,1,1)
+	discord.TextSize = 20
+	discord.TextXAlignment = Enum.TextXAlignment.Left
+
+	local link = Instance.new("TextLabel")
+	link.Parent = content
+	link.BackgroundTransparency = 1
+	link.Position = UDim2.new(0.03,0,0.70,0)
+	link.Size = UDim2.new(0,600,0,25)
+	link.Font = Enum.Font.GothamBold
+	link.Text = "https://discord.gg/3McxKFJtM"
+	link.TextColor3 = Color3.fromRGB(0,120,255)
+	link.TextSize = 18
+	link.TextXAlignment = Enum.TextXAlignment.Left
+
+	local rejoin = Instance.new("TextButton")
+	rejoin.Parent = content
+	rejoin.BackgroundColor3 = Color3.fromRGB(15,0,0)
+	rejoin.BackgroundTransparency = 0.25
+	rejoin.Position = UDim2.new(0.03,0,0.82,0)
+	rejoin.Size = UDim2.new(0,660,0,45)
+	rejoin.BorderSizePixel = 0
+	rejoin.Text = "Rejoin"
+	rejoin.Font = Enum.Font.GothamBold
+	rejoin.TextColor3 = Color3.new(1,1,1)
+	rejoin.TextSize = 22
+
+	Instance.new("UICorner", rejoin).CornerRadius = UDim.new(0,10)
+
+	rejoin.MouseButton1Click:Connect(function()
+		TeleportService:Teleport(game.PlaceId, player)
+	end)
+end)
+
+-- FUN
+fun.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Fun", "Em breve...",0.05)
+end)
+
+-- AVATAR
+avatar.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Avatar", "Em breve...",0.05)
+end)
+
+-- HOUSE
+house.MouseButton1Click:Connect(function()
+	clear()
+	createBox("House", "Em breve...",0.05)
+end)
+
+-- CAR
+car.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Car", "Em breve...",0.05)
+end)
+
+-- RGB
+rgb.MouseButton1Click:Connect(function()
+	clear()
+	createBox("RGB", "Em breve...",0.05)
+end)
+
+-- MUSIC ALL
+musicall.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Music All", "Em breve...",0.05)
+end)
+
+-- MUSIC
+music.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Music", "Em breve...",0.05)
+end)
+
+-- TROLL
+troll.MouseButton1Click:Connect(function()
+	clear()
+
+	local msg = Instance.new("TextLabel")
+	msg.Parent = content
+	msg.BackgroundTransparency = 1
+	msg.Position = UDim2.new(0.2,0,0.4,0)
+	msg.Size = UDim2.new(0,400,0,50)
+	msg.Font = Enum.Font.GothamBold
+	msg.Text = "Troll Visual Em Breve..."
+	msg.TextColor3 = Color3.new(1,1,1)
+	msg.TextSize = 30
+end)
+
+-- PROTECTION
+protection.MouseButton1Click:Connect(function()
+	clear()
+	createBox("Protection", "Em breve...",0.05)
+end)
+
+-- ADMIN
+admin.MouseButton1Click:Connect(function()
+	clear()
+
+	local txt = Instance.new("TextLabel")
+	txt.Parent = content
+	txt.BackgroundTransparency = 1
+	txt.Position = UDim2.new(0.2,0,0.4,0)
+	txt.Size = UDim2.new(0,400,0,50)
+	txt.Font = Enum.Font.GothamBold
+	txt.Text = "Painel Admin Em Breve"
+	txt.TextColor3 = Color3.new(1,1,1)
+	txt.TextSize = 30
+end)
+
+-- DEFAULT
+credits:MouseButton1Click()
+
+-- OPEN BUTTON
+local open = Instance.new("ImageButton")
+open.Parent = gui
+open.BackgroundTransparency = 1
+open.Position = UDim2.new(0.02,0,0.4,0)
+open.Size = UDim2.new(0,60,0,60)
+open.Image = "rbxassetid://79078643989345"
+
+local opened = true
+
+open.MouseButton1Click:Connect(function()
+	opened = not opened
+	main.Visible = opened
+end)
+
+close.MouseButton1Click:Connect(function()
+	main.Visible = false
+	opened = false
+end)
