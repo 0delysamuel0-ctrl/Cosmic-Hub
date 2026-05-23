@@ -1,0 +1,329 @@
+--// Cosmic Hub | Brookhaven
+--// By: douguser25
+
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local UIS = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+
+-- GUI
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "CosmicHub"
+gui.ResetOnSpawn = false
+
+-- MAIN
+local main = Instance.new("Frame", gui)
+main.Size = UDim2.new(0,1080,0,650)
+main.Position = UDim2.new(0.18,0,0.1,0)
+main.BackgroundColor3 = Color3.fromRGB(5,5,5)
+main.BackgroundTransparency = 0.1
+main.Active = true
+main.Draggable = true
+
+Instance.new("UICorner", main).CornerRadius = UDim.new(0,12)
+
+local stroke = Instance.new("UIStroke", main)
+stroke.Color = Color3.fromRGB(0,80,255)
+stroke.Thickness = 2
+
+-- TITLE
+local title = Instance.new("TextLabel", main)
+title.Size = UDim2.new(0,400,0,40)
+title.Position = UDim2.new(0.02,0,0.01,0)
+title.BackgroundTransparency = 1
+title.Text = "Cosmic Hub | Brookhaven"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 28
+title.TextColor3 = Color3.new(1,1,1)
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+local by = Instance.new("TextLabel", main)
+by.Size = UDim2.new(0,200,0,30)
+by.Position = UDim2.new(0.27,0,0.015,0)
+by.BackgroundTransparency = 1
+by.Text = "By: douguser25"
+by.Font = Enum.Font.Gotham
+by.TextSize = 18
+by.TextColor3 = Color3.fromRGB(150,150,150)
+by.TextXAlignment = Enum.TextXAlignment.Left
+
+-- CLOSE
+local close = Instance.new("TextButton", main)
+close.Size = UDim2.new(0,35,0,35)
+close.Position = UDim2.new(0.96,0,0.01,0)
+close.BackgroundTransparency = 1
+close.Text = "X"
+close.Font = Enum.Font.GothamBold
+close.TextSize = 28
+close.TextColor3 = Color3.new(1,1,1)
+
+close.MouseButton1Click:Connect(function()
+	gui:Destroy()
+end)
+
+-- SIDEBAR
+local sidebar = Instance.new("Frame", main)
+sidebar.Size = UDim2.new(0,280,0,560)
+sidebar.Position = UDim2.new(0.02,0,0.08,0)
+sidebar.BackgroundTransparency = 1
+
+local layout = Instance.new("UIListLayout", sidebar)
+layout.Padding = UDim.new(0,10)
+
+-- CONTENT
+local content = Instance.new("Frame", main)
+content.Size = UDim2.new(0,730,0,560)
+content.Position = UDim2.new(0.31,0,0.08,0)
+content.BackgroundColor3 = Color3.fromRGB(10,10,10)
+
+Instance.new("UICorner", content).CornerRadius = UDim.new(0,10)
+
+local contentStroke = Instance.new("UIStroke", content)
+contentStroke.Color = Color3.fromRGB(0,80,255)
+
+-- FUNCTION CREATE TAB
+function createTab(name)
+	local btn = Instance.new("TextButton", sidebar)
+	btn.Size = UDim2.new(1,0,0,45)
+	btn.BackgroundColor3 = Color3.fromRGB(10,10,10)
+	btn.Text = "   "..name
+	btn.Font = Enum.Font.Gotham
+	btn.TextSize = 22
+	btn.TextColor3 = Color3.new(1,1,1)
+	btn.TextXAlignment = Enum.TextXAlignment.Left
+	
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,10)
+
+	local stroke = Instance.new("UIStroke", btn)
+	stroke.Color = Color3.fromRGB(0,80,255)
+
+	return btn
+end
+
+-- CLEAR CONTENT
+function clear()
+	for _,v in pairs(content:GetChildren()) do
+		if not v:IsA("UIStroke") and not v:IsA("UICorner") then
+			v:Destroy()
+		end
+	end
+end
+
+-- CREATE BUTTON IN CONTENT
+function createContentButton(text, callback, posY)
+	local btn = Instance.new("TextButton", content)
+	btn.Size = UDim2.new(0,650,0,50)
+	btn.Position = UDim2.new(0.04,0,posY,0)
+	btn.BackgroundColor3 = Color3.fromRGB(15,15,15)
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 22
+	btn.TextColor3 = Color3.new(1,1,1)
+
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0,10)
+
+	local stroke = Instance.new("UIStroke", btn)
+	stroke.Color = Color3.fromRGB(0,80,255)
+
+	btn.MouseButton1Click:Connect(callback)
+end
+
+-- TABS
+local credits = createTab("Credits")
+local fun = createTab("Fun")
+local avatar = createTab("Avatar")
+local house = createTab("House")
+local car = createTab("Car")
+local rgb = createTab("RGB")
+local musicall = createTab("Music All")
+local music = createTab("Music")
+local troll = createTab("Troll")
+local protection = createTab("Protection")
+local admin = createTab("Painel Adm")
+
+-- CREDITS PAGE
+credits.MouseButton1Click:Connect(function()
+	clear()
+
+	local title = Instance.new("TextLabel", content)
+	title.Size = UDim2.new(0,400,0,40)
+	title.Position = UDim2.new(0.03,0,0.03,0)
+	title.BackgroundTransparency = 1
+	title.Text = "Créditos do Hub"
+	title.Font = Enum.Font.GothamBold
+	title.TextSize = 32
+	title.TextColor3 = Color3.new(1,1,1)
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	local info = Instance.new("TextLabel", content)
+	info.Size = UDim2.new(0,650,0,300)
+	info.Position = UDim2.new(0.03,0,0.12,0)
+	info.BackgroundTransparency = 1
+	info.Text = [[
+Desenvolvedor:
+douguser25
+
+Admin:
+Ninguém
+
+Você Está Usando:
+Cosmic Hub
+
+Discord:
+https://discord.gg/3McxKFJtM
+
+Rejoin:
+Ira sai do jogo e entra de novo
+]]
+	info.Font = Enum.Font.Gotham
+	info.TextSize = 24
+	info.TextColor3 = Color3.new(1,1,1)
+	info.TextXAlignment = Enum.TextXAlignment.Left
+	info.TextYAlignment = Enum.TextYAlignment.Top
+end)
+
+-- FUN PAGE
+fun.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Pular Muito Alto", function()
+		player.Character.Humanoid.JumpPower = 120
+	end,0.05)
+
+	createContentButton("Velocidade x2", function()
+		player.Character.Humanoid.WalkSpeed = 40
+	end,0.17)
+
+	createContentButton("Resetar Speed", function()
+		player.Character.Humanoid.WalkSpeed = 16
+	end,0.29)
+
+	createContentButton("Resetar Jump", function()
+		player.Character.Humanoid.JumpPower = 50
+	end,0.41)
+end)
+
+-- AVATAR PAGE
+avatar.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Invisible Fake", function()
+		game.StarterGui:SetCore("SendNotification",{
+			Title = "Cosmic Hub",
+			Text = "Em breve...",
+			Duration = 3
+		})
+	end,0.05)
+
+	createContentButton("Animação Fake", function()
+	end,0.17)
+
+	createContentButton("Fake Headless", function()
+	end,0.29)
+end)
+
+-- HOUSE PAGE
+house.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("House Options Em Breve", function()
+	end,0.05)
+end)
+
+-- CAR PAGE
+car.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Car Boost", function()
+		game.StarterGui:SetCore("SendNotification",{
+			Title = "Cosmic Hub",
+			Text = "Entre em um carro primeiro",
+			Duration = 3
+		})
+	end,0.05)
+end)
+
+-- RGB PAGE
+rgb.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("RGB GUI", function()
+		while wait() do
+			stroke.Color = Color3.fromHSV(tick()%5/5,1,1)
+			contentStroke.Color = Color3.fromHSV(tick()%5/5,1,1)
+		end
+	end,0.05)
+end)
+
+-- MUSIC PAGE
+music.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Music System Em Breve", function()
+	end,0.05)
+end)
+
+-- MUSIC ALL
+musicall.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Music All Em Breve", function()
+	end,0.05)
+end)
+
+-- TROLL
+troll.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Fake Ban Screen", function()
+		local msg = Instance.new("Message", workspace)
+		msg.Text = "Você foi banido do servidor"
+		wait(3)
+		msg:Destroy()
+	end,0.05)
+end)
+
+-- PROTECTION
+protection.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Anti AFK", function()
+		local vu = game:GetService("VirtualUser")
+		player.Idled:Connect(function()
+			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	end,0.05)
+end)
+
+-- ADMIN
+admin.MouseButton1Click:Connect(function()
+	clear()
+
+	createContentButton("Painel Admin Em Breve", function()
+	end,0.05)
+end)
+
+-- LOAD DEFAULT
+credits:MouseButton1Click()
+
+--// OPEN/CLOSE BUTTON
+
+local Open = Instance.new("ImageButton", gui)
+Open.Name = "Open"
+Open.Parent = gui
+Open.BackgroundTransparency = 1
+Open.Position = UDim2.new(0.02,0,0.45,0)
+Open.Size = UDim2.new(0,60,0,60)
+Open.Image = "rbxassetid://79078643989345"
+
+local OpenCorner = Instance.new("UICorner", Open)
+OpenCorner.CornerRadius = UDim.new(1,0)
+
+local opened = true
+
+Open.MouseButton1Click:Connect(function()
+	opened = not opened
+	main.Visible = opened
+end)
